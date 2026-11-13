@@ -46,8 +46,8 @@ const ruta = Astro.url.pathname.replace(/\/?$/, '/');
     <footer class="pie">
       <div class="contenedor pie__fila">
         <span class="etiqueta">© {SITIO.autor}</span>
-        {!privado && <Musica client:only="react" base={base} />}
       </div>
     </footer>
+    {!privado && <Musica client:only="react" base={base} />}
   </body>
 </html>

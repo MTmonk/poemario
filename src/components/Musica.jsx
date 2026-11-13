@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { PISTAS } from '../musica.mjs';
 
-// Reproductor discreto: nunca suena solo; empieza cuando el visitante lo pide.
+// Reproductor discreto y siempre a la vista: nunca suena solo; empieza cuando el visitante lo pide.
+// En pantallas anchas queda fijo en la columna de la fecha; en el móvil es una barra al pie.
 export default function Musica({ base }) {
   const audio = useRef(null);
   const [i, setI] = useState(() => Math.floor(Math.random() * Math.max(1, PISTAS.length)));
@@ -18,22 +19,25 @@ export default function Musica({ base }) {
     if (sonando) audio.current.pause();
     setSonando(!sonando);
   };
-  const estilo = { background: 'none', border: '2px solid currentColor', color: 'inherit', font: 'inherit', padding: '0.45rem 0.9rem', cursor: 'pointer' };
 
   return (
-    <div className="etiqueta" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.8rem' }}>
+    <aside className={sonando ? 'musica musica--sonando' : 'musica'} aria-label="Música">
       <audio ref={audio} src={`${base}musica/${pista.archivo}`} preload="none" onEnded={siguiente} onError={siguiente} />
-      <button type="button" style={estilo} onClick={alternar} aria-pressed={sonando}>
-        {sonando ? '❚❚ Pausa' : '▶ Música'}
-      </button>
+      <div className="musica__botones">
+        <button type="button" onClick={alternar} aria-pressed={sonando}>
+          {sonando ? '❚❚ Pausa' : '▶ Música'}
+        </button>
+        {sonando && (
+          <button type="button" onClick={siguiente} aria-label="Siguiente pieza" title="Siguiente pieza">▶▶</button>
+        )}
+      </div>
       {sonando && (
-        <>
-          <button type="button" style={estilo} onClick={siguiente} aria-label="Siguiente pieza">▶▶</button>
-          <span style={{ letterSpacing: '0.08em' }}>
-            {pista.autor} · {pista.titulo} · <a href={`${base}musica/`}>créditos</a>
-          </span>
-        </>
+        <p className="musica__pista">
+          <b>{pista.autor}</b>
+          <span>{pista.titulo}</span>
+          <a href={`${base}musica/`}>Créditos</a>
+        </p>
       )}
-    </div>
+    </aside>
   );
 }

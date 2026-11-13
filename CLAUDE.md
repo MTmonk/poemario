@@ -9,7 +9,7 @@ Daily poetry site for Mario Núñez y Mariel, live at https://mtmonk.github.io/p
 - **Admin** (`src/components/Admin.jsx`): React + TipTap. It talks straight to the GitHub API with a fine-grained token kept in the browser's `localStorage`. Setup link: `/admin/#llave=<token>`. `.docx` import uses mammoth in the browser.
 - **Cards**: `src/lib/tarjeta.mjs` draws a JPEG per poem with satori + sharp: `/tarjetas/<fecha>.jpg` (4:5, Instagram/Facebook) and `/og/<fecha>.jpg` (link previews).
 - **Social**: `scripts/social.mjs` runs after deploy. It posts poems from the last 2 days that are not yet in `datos/social.json`, then the workflow commits that log. Without the `META_*` secrets it does nothing.
-- **Music**: `src/musica.mjs` is the playlist. It never autoplays.
+- **Music**: `src/musica.mjs` is the playlist. It never autoplays. The player (`.musica`) is fixed on screen so it follows scrolling: a box in the date column on wide screens, a bottom bar on phones.
 
 ## Key decisions
 - **Astro, not a React SPA**: each poem needs its own real HTML page so Facebook/Instagram link previews work.
