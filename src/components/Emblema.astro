@@ -1,0 +1,19 @@
+---
+// Composición constructivista: la cuña roja entra en el círculo negro (homenaje a El Lissitzky).
+const { grande = false } = Astro.props;
+---
+{grande ? (
+  <svg viewBox="0 0 400 400" role="img" aria-label="Composición geométrica: una cuña roja entra en un círculo negro">
+    <circle cx="255" cy="185" r="125" fill="#151412" />
+    <polygon points="20,70 250,190 60,290" fill="#d42a1c" />
+    <rect x="40" y="335" width="230" height="10" fill="#151412" transform="rotate(-14 40 335)" />
+    <rect x="300" y="345" width="60" height="22" fill="#d42a1c" transform="rotate(-14 300 345)" />
+    <rect x="318" y="30" width="46" height="8" fill="#151412" transform="rotate(32 318 30)" />
+    <circle cx="352" cy="318" r="9" fill="#151412" />
+  </svg>
+) : (
+  <svg viewBox="0 0 40 40" aria-hidden="true">
+    <circle cx="25" cy="20" r="13" fill="#151412" />
+    <polygon points="1,8 25,20 5,31" fill="#d42a1c" />
+  </svg>
+)}

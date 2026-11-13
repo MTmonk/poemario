@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import retrato from '../assets/portrait.jpeg';
+import { SITIO } from '../config.mjs';
+---
+<Base titulo="Bio" descripcion={`${SITIO.autor}: sociólogo, diplomático, escritor y poeta.`}>
+  <div class="contenedor bio">
+    <div class="bio__retrato">
+      <Image src={retrato} alt={`Retrato de ${SITIO.autor} en su biblioteca, con su perro en el regazo`} widths={[400, 800]} sizes="(min-width: 52rem) 24rem, 90vw" />
+    </div>
+    <div class="bio__texto">
+      <span class="etiqueta">Sociólogo · Diplomático · Escritor</span>
+      <h1>Mario Núñez Mariel</h1>
+
+      <p>Nació en México el 27 de marzo de 1946. Es licenciado en Sociología por la Facultad de Ciencias Políticas y Sociales de la UNAM.</p>
+      <p>En 1968, a los 21 años, representó a su facultad en el Consejo Nacional de Huelga durante el movimiento estudiantil. Tras la masacre de Tlatelolco vivió cinco años de exilio en Europa y Estados Unidos.</p>
+
+      <blockquote class="bio__cita">
+        «La memoria ganó la batalla contra la fuerza del olvido.»
+        <footer>— 57 años después del 2 de octubre de 1968</footer>
+      </blockquote>
+
+      <p>Ingresó al Servicio Exterior Mexicano en 1982 y durante más de una década representó a México en Nueva Delhi, París, Praga, Montevideo y Los Ángeles. Fue asesor de tres cancilleres y del secretario de Desarrollo Social.</p>
+      <p>Fue coordinador general de producción y distribución del diario <em>La Jornada</em> y analista internacional en CUNY TV, Radio Educación y otros medios de ambos lados de la frontera.</p>
+      <p>Es autor de <em>Entre terroristas: una política exterior para el mundo del terror</em> (Fondo de Cultura Económica, 2006) y fundó y dirigió el Instituto de Estudios Mexicanos Transnacionales de la Universidad de Rutgers, en Nueva Jersey.</p>
+      <p>Fue director ejecutivo del Patronato del INAH, desde donde impulsó alianzas internacionales para Teotihuacán. En 2023 actuó en la película <em>Heroico</em>, de David Zonana, en el papel del profesor de Derechos Humanos.</p>
+      <p>Hoy escribe un poema cada día.</p>
+
+      <ul class="hitos">
+        <li><b>1946</b><span>Nace en México</span></li>
+        <li><b>1968</b><span>Consejo Nacional de Huelga, UNAM</span></li>
+        <li><b>1982</b><span>Servicio Exterior Mexicano</span></li>
+        <li><b>2006</b><span><em>Entre terroristas</em>, Fondo de Cultura Económica</span></li>
+        <li><b>2023</b><span><em>Heroico</em>, de David Zonana</span></li>
+      </ul>
+    </div>
+  </div>
+</Base>

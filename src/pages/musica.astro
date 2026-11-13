@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { PISTAS } from '../musica.mjs';
+---
+<Base titulo="Música" descripcion="Créditos y licencias de la música del sitio.">
+  <div class="contenedor vacio">
+    <p class="etiqueta">Música del sitio</p>
+    <p>Todas las grabaciones son de dominio público o tienen licencia libre.</p>
+    <ul class="hitos" style="max-width: 46rem">
+      {PISTAS.map((p) => (
+        <li style="grid-template-columns: 1fr">
+          <span>
+            <strong>{p.autor}</strong> — {p.titulo}. {p.interprete}. <a href={p.fuente}>{p.licencia}</a>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Base>

@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Emblema from '../components/Emblema.astro';
+import Poema from '../components/Poema.astro';
+import { SITIO } from '../config.mjs';
+import { poemasPublicados } from '../lib/poemas.mjs';
+
+const poemas = poemasPublicados();
+---
+<Base imagen={poemas[0] ? `og/${poemas[0].fecha}.jpg` : undefined}>
+  <section class="portada">
+    <div class="contenedor portada__fila">
+      <div>
+        <h1>Poe<span>ma</span>rio</h1>
+        <p class="etiqueta">{SITIO.autor} · Un poema cada día</p>
+      </div>
+      <div class="portada__forma"><Emblema grande /></div>
+    </div>
+  </section>
+  <div class="contenedor">
+    {poemas.map((poema) => <Poema poema={poema} enlazar />)}
+    {poemas.length === 0 && <p class="vacio">El primer poema llegará muy pronto.</p>}
+  </div>
+</Base>

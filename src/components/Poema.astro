@@ -1,0 +1,19 @@
+---
+import { partesFecha } from '../lib/poema.mjs';
+
+const { poema, enlazar = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const url = `${base}poemas/${poema.fecha}/`;
+const f = partesFecha(poema.fecha);
+const Titulo = enlazar ? 'h2' : 'h1';
+---
+<article class="poema" id={poema.fecha}>
+  <a class="poema__fecha" href={url} aria-label={f.larga}>
+    <span class="poema__dia">{f.dia}</span>
+    <time class="etiqueta" datetime={poema.fecha}>{f.mes} {f.anio}</time>
+  </a>
+  <div>
+    <Titulo class="poema__titulo">{enlazar ? <a href={url}>{poema.titulo}</a> : poema.titulo}</Titulo>
+    <div class="poema__texto" set:html={poema.html} />
+  </div>
+</article>

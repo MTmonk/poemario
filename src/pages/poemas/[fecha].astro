@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Poema from '../../components/Poema.astro';
+import { extracto } from '../../lib/poema.mjs';
+import { poemasPublicados } from '../../lib/poemas.mjs';
+
+export function getStaticPaths() {
+  const poemas = poemasPublicados();
+  return poemas.map((poema, i) => ({
+    params: { fecha: poema.fecha },
+    props: { poema, siguiente: poemas[i - 1], anterior: poemas[i + 1] },
+  }));
+}
+
+const { poema, anterior, siguiente } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const descripcion = extracto(poema.html, 3).lineas.filter(Boolean).join(' / ');
+---
+<Base titulo={poema.titulo} descripcion={descripcion} imagen={`og/${poema.fecha}.jpg`}>
+  <div class="contenedor">
+    <Poema poema={poema} />
+    <nav class="pasos etiqueta" aria-label="Otros poemas">
+      <span>{anterior && <a href={`${base}poemas/${anterior.fecha}/`}>← {anterior.titulo}</a>}</span>
+      <span>{siguiente && <a href={`${base}poemas/${siguiente.fecha}/`}>{siguiente.titulo} →</a>}</span>
+    </nav>
+  </div>
+</Base>

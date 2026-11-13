@@ -1,0 +1,79 @@
+name: Publicar
+
+# Reconstruye el sitio y publica en redes:
+#  - cada vez que cambia algo en main (por ejemplo, un poema guardado desde el administrador)
+#  - cada día a las 12:05 UTC (6:05 en Ciudad de México), para sacar el poema programado del día
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['datos/**', '*.md']
+  schedule:
+    - cron: '5 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  sitio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  desplegar:
+    needs: sitio
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@v4
+
+  redes:
+    needs: desplegar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Publicar en Facebook e Instagram
+        env:
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
+        run: node scripts/social.mjs
+      - name: Guardar el registro de lo publicado
+        if: always()
+        run: |
+          git add datos/social.json
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Registro de redes"
+          git pull --rebase origin main
+          git push origin HEAD:main

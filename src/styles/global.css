@@ -1,0 +1,117 @@
+@import '@fontsource/jost/latin-500.css';
+@import '@fontsource/jost/latin-800.css';
+@import '@fontsource/eb-garamond/latin-400.css';
+@import '@fontsource/eb-garamond/latin-400-italic.css';
+@import '@fontsource/eb-garamond/latin-500.css';
+
+:root {
+  --papel: #f2ecdf;
+  --tinta: #151412;
+  --rojo: #d42a1c;
+  --gris: #6b655b;
+  --linea: 6px;
+  --geo: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --serif: 'EB Garamond', 'Garamond', Georgia, serif;
+  --ancho: 68rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--rojo); outline-offset: 3px; }
+
+.contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 1.25rem; }
+
+.etiqueta {
+  font-family: var(--geo);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ─── Cabecera ─────────────────────────────────────────── */
+.cabecera { border-bottom: var(--linea) solid var(--tinta); }
+.cabecera__fila { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: 1rem; }
+.marca { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; font-family: var(--geo); font-weight: 800; font-size: 1.15rem; letter-spacing: 0.3em; text-transform: uppercase; }
+.marca svg { width: 2.2rem; height: 2.2rem; flex: none; }
+.nav { display: flex; gap: 1.5rem; }
+.nav a { text-decoration: none; padding: 0.4rem 0; border-bottom: 3px solid transparent; }
+.nav a:hover, .nav a[aria-current='page'] { border-bottom-color: var(--rojo); }
+
+/* ─── Portada ──────────────────────────────────────────── */
+.portada { border-bottom: var(--linea) solid var(--tinta); overflow: hidden; }
+.portada__fila { display: grid; grid-template-columns: 1fr; align-items: center; gap: 1rem; padding-top: 2.5rem; padding-bottom: 2.5rem; }
+.portada h1 {
+  margin: 0;
+  font-family: var(--geo);
+  font-weight: 800;
+  font-size: clamp(3rem, 13vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.portada h1 span { color: var(--rojo); }
+.portada p { margin: 1.2rem 0 0; }
+.portada__forma { width: min(70%, 15rem); }
+@media (min-width: 52rem) {
+  .portada__fila { grid-template-columns: 1.4fr 1fr; padding-top: 4rem; padding-bottom: 4rem; }
+  .portada__forma { width: 100%; }
+}
+
+/* ─── Poema ────────────────────────────────────────────── */
+.poema { display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 3rem 0; border-bottom: 2px solid var(--tinta); }
+.poema:last-of-type { border-bottom: 0; }
+.poema__fecha { display: flex; align-items: baseline; gap: 0.7rem; text-decoration: none; font-family: var(--geo); }
+.poema__dia { font-weight: 800; font-size: 3.5rem; line-height: 0.85; color: var(--rojo); }
+.poema__titulo { margin: 0 0 1.6rem; font-family: var(--geo); font-weight: 800; font-size: clamp(1.5rem, 4.5vw, 2.4rem); line-height: 1.1; text-transform: uppercase; overflow-wrap: anywhere; }
+.poema__titulo a { text-decoration: none; }
+.poema__titulo a:hover { color: var(--rojo); }
+.poema__texto { max-width: 40rem; }
+.poema__texto p { margin: 0; white-space: pre-wrap; }
+.poema__texto p:empty { height: 1.55em; }
+@media (min-width: 52rem) {
+  .poema { grid-template-columns: 11rem 1fr; gap: 2rem; padding: 4.5rem 0; }
+  .poema__fecha { flex-direction: column; align-items: flex-start; gap: 0.6rem; position: sticky; top: 1.5rem; align-self: start; }
+  .poema__dia { font-size: 6rem; }
+}
+
+.pasos { display: flex; justify-content: space-between; gap: 1rem; padding: 1.5rem 0 3rem; border-top: var(--linea) solid var(--tinta); }
+.pasos a { text-decoration: none; }
+.pasos a:hover { color: var(--rojo); }
+
+.vacio { padding: 5rem 0; }
+
+/* ─── Bio ──────────────────────────────────────────────── */
+.bio { display: grid; grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 0 4rem; }
+.bio__retrato { position: relative; max-width: 24rem; margin: 0 1rem 1rem 0; }
+.bio__retrato::before { content: ''; position: absolute; inset: 1rem -1rem -1rem 1rem; background: var(--rojo); }
+.bio__retrato img { position: relative; display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.08); }
+.bio h1 { margin: 0.4rem 0 1.5rem; font-family: var(--geo); font-weight: 800; font-size: clamp(2.2rem, 7vw, 4.2rem); line-height: 0.95; text-transform: uppercase; }
+.bio__texto { max-width: 38rem; }
+.bio__texto p { margin: 0 0 1.1rem; }
+.bio__cita { margin: 2rem 0; padding-left: 1.2rem; border-left: var(--linea) solid var(--rojo); font-style: italic; font-size: 1.45rem; line-height: 1.35; }
+.bio__cita footer { margin-top: 0.5rem; font-style: normal; font-size: 1rem; color: var(--gris); }
+.hitos { list-style: none; margin: 2.5rem 0 0; padding: 0; border-top: 2px solid var(--tinta); }
+.hitos li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: baseline; padding: 0.7rem 0; border-bottom: 2px solid var(--tinta); }
+.hitos b { font-family: var(--geo); font-weight: 800; font-size: 1.5rem; color: var(--rojo); }
+@media (min-width: 52rem) {
+  .bio { grid-template-columns: 24rem 1fr; gap: 4rem; padding: 4.5rem 0 5rem; }
+  .bio__retrato { position: sticky; top: 1.5rem; align-self: start; }
+}
+
+/* ─── Pie ──────────────────────────────────────────────── */
+.pie { background: var(--tinta); color: var(--papel); }
+.pie__fila { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.pie a { color: var(--papel); }

@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import Emblema from '../components/Emblema.astro';
+import Musica from '../components/Musica.jsx';
+import { SITIO } from '../config.mjs';
+
+const { titulo, descripcion = SITIO.descripcion, imagen, privado = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const tituloPagina = titulo ? `${titulo} — ${SITIO.titulo}` : `${SITIO.titulo} — ${SITIO.autor}`;
+const canonica = new URL(Astro.url.pathname, Astro.site).href;
+const og = imagen ? new URL(base + imagen, Astro.site).href : undefined;
+const ruta = Astro.url.pathname.replace(/\/?$/, '/');
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloPagina}</title>
+    <meta name="description" content={descripcion} />
+    {privado ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={canonica} />}
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content={SITIO.titulo} />
+    <meta property="og:title" content={titulo ?? SITIO.titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:locale" content="es_MX" />
+    {og && <meta property="og:image" content={og} />}
+    {og && <meta property="og:image:width" content="1200" />}
+    {og && <meta property="og:image:height" content="630" />}
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  </head>
+  <body>
+    <header class="cabecera">
+      <div class="contenedor cabecera__fila">
+        <a class="marca" href={base}><Emblema /> {SITIO.titulo}</a>
+        <nav class="nav etiqueta" aria-label="Secciones">
+          <a href={base} aria-current={ruta === base ? 'page' : undefined}>Poemas</a>
+          <a href={`${base}bio/`} aria-current={ruta === `${base}bio/` ? 'page' : undefined}>Bio</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="pie">
+      <div class="contenedor pie__fila">
+        <span class="etiqueta">© {SITIO.autor}</span>
+        {!privado && <Musica client:only="react" base={base} />}
+      </div>
+    </footer>
+  </body>
+</html>
