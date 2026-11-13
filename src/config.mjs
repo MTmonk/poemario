@@ -1,8 +1,8 @@
 // Ajustes del sitio. Lo usan las páginas, el administrador y scripts/social.mjs.
 export const SITIO = {
   titulo: 'Poemario',
-  autor: 'Mario Núñez Mariel',
-  descripcion: 'Un poema cada día, por Mario Núñez Mariel.',
+  autor: 'Mario Núñez y Mariel',
+  descripcion: 'Un poema cada día, por Mario Núñez y Mariel.',
   url: 'https://mtmonk.github.io/poemario',
   // Repositorio donde el administrador guarda los poemas.
   repoDueno: 'MTmonk',

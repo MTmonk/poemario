@@ -1,6 +1,6 @@
 # Poemario
 
-Un poema cada día, por Mario Núñez Mariel — https://mtmonk.github.io/poemario
+Un poema cada día, por Mario Núñez y Mariel — https://mtmonk.github.io/poemario
 
 - **Sitio**: Astro, publicado en GitHub Pages.
 - **Escribir**: https://mtmonk.github.io/poemario/admin/ (hace falta una llave).

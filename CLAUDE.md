@@ -1,7 +1,7 @@
 # Claude Code — Project Notes
 
 ## Project
-Daily poetry site for Mario Núñez Mariel, live at https://mtmonk.github.io/poemario (repo `MTmonk/poemario`). Astro static site on GitHub Pages, a browser-only admin at `/admin/`, and a GitHub Actions workflow that builds, deploys and posts to Facebook and Instagram. Budget is $0: no server, no database, no paid service. Everything visible to readers and to the poet is in Spanish.
+Daily poetry site for Mario Núñez y Mariel, live at https://mtmonk.github.io/poemario (repo `MTmonk/poemario`). Astro static site on GitHub Pages, a browser-only admin at `/admin/`, and a GitHub Actions workflow that builds, deploys and posts to Facebook and Instagram. Budget is $0: no server, no database, no paid service. Everything visible to readers and to the poet is in Spanish.
 
 ## How it works
 - **Poems** are files `poemas/AAAA-MM-DD.json` with `{ titulo, fecha, html }`. One poem per day; the filename must match `fecha`. In `html` each `<p>` is a line (or a prose paragraph) and an empty `<p></p>` is a stanza break. Only `p br em i strong b` survive sanitising.
