@@ -22,8 +22,12 @@
 
 .adm-lista { list-style: none; margin: 1.5rem 0 0; padding: 0; border-top: 3px solid var(--tinta); }
 .adm-lista li { border-bottom: 2px solid var(--tinta); }
-.adm-lista button { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; width: 100%; padding: 1rem 0.2rem; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.adm-lista button:hover { background: #fff; }
+.adm-lista li { display: flex; align-items: stretch; }
+.adm-lista__abrir { flex: 1; min-width: 0; display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; width: 100%; padding: 1rem 0.2rem; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.adm-lista__abrir:hover { background: #fff; }
+.adm-lista__borrar { flex: none; padding: 0 1rem; border: 0; border-left: 2px solid var(--tinta); background: none; color: var(--tinta); font-family: var(--geo); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; }
+.adm-lista__borrar:hover { background: var(--rojo); color: #fff; }
+.adm-lista__borrar:disabled { opacity: 0.55; cursor: wait; }
 .adm-lista__fecha { grid-column: 1 / -1; font-family: var(--geo); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rojo); }
 .adm-lista__titulo { overflow-wrap: anywhere; }
 .adm-estado { align-self: center; font-family: var(--geo); font-size: 0.85rem; color: var(--gris); }
@@ -36,3 +40,16 @@
 .adm-papel:focus { border-color: var(--rojo); }
 .adm-papel p:empty, .adm-papel p:has(> br:only-child) { height: auto; }
 .adm-acciones { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+.adm-estado--fallo { color: var(--rojo); font-weight: 800; }
+
+/* Estado del sitio y límites */
+.adm-estado-sitio { margin: 0 0 1.5rem; }
+.adm-estado-sitio .adm-error { margin: 0 0 0.8rem; }
+.adm-estado-sitio .adm-nota { margin: 0; }
+.adm-aviso--curso { border-left: var(--linea) solid var(--rojo); }
+.adm-error--lista { margin: 0 0 1.5rem; }
+.adm-nota--limite { margin-top: 1.2rem; padding-left: 0.9rem; border-left: 3px solid var(--tinta); color: var(--tinta); }
+.adm-limites { margin-top: 2.5rem; padding: 1rem 1.2rem; border: 3px solid var(--tinta); font-size: 1.1rem; }
+.adm-limites summary { font-family: var(--geo); font-weight: 800; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
+.adm-limites ul { margin: 1rem 0 0; padding-left: 1.2rem; }
+.adm-limites li { margin: 0 0 0.5rem; }

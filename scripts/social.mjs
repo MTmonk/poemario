@@ -99,10 +99,17 @@ async function main() {
       try {
         await esperarImagen(tarjeta);
         hecho[red] = await publicar(poema, tarjeta, url);
+        if (hecho.error) {
+          delete hecho.error[red];
+          if (!Object.keys(hecho.error).length) delete hecho.error;
+        }
         writeFileSync(ARCHIVO_REGISTRO, JSON.stringify(registro, null, 2) + '\n');
         console.log(`✓ ${red}: «${poema.titulo}» (${poema.fecha})`);
       } catch (e) {
         fallos++;
+        // El administrador lee esta nota para avisarle al poeta de que algo falló.
+        (hecho.error ??= {})[red] = String(e.message).slice(0, 200);
+        writeFileSync(ARCHIVO_REGISTRO, JSON.stringify(registro, null, 2) + '\n');
         console.error(`✗ ${red}: «${poema.titulo}» (${poema.fecha}) — ${e.message}`);
       }
     }
